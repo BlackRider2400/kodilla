@@ -12,20 +12,31 @@ public class ShapeCollector {
     }
 
     public void addFigure(Shape shape){
-
+        shapes.add(shape);
     }
 
-    public boolean removeFigure(){
+    public boolean removeFigure(Shape shape){
+        if(shapes.contains(shape)){
+            shapes.remove(shape);
+            return true;
+        }
         return false;
-
     }
 
     public Shape getFigure(int n){
-        return null;
+
+        return shapes.get(n);
     }
 
-    public void showFigures(){
+    public String showFigures(){
+        String out = "";
 
+        for(Shape x : shapes){
+            out += x.getShapeName() + ", " + x.getField();
+            out += "; ";
+        }
+
+        return out;
     }
 
     public List<Shape> getShapes() {
