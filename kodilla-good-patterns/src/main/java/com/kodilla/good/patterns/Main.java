@@ -10,6 +10,7 @@ public class Main {
         MovieStore movieStore = new MovieStore();
         movieStore.getMovies().values().stream()
                 .flatMap(strings -> strings.stream())
-                .forEach(System.out::println);
+                .map(string -> string + "!")
+                .forEach(System.out::print);
     }
 }
