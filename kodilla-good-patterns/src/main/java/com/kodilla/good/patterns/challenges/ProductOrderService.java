@@ -12,14 +12,15 @@ public class ProductOrderService {
         this.informationService = informationService;
     }
 
-    public void process(SellRequest sellRequest){
+    public SellDto process(SellRequest sellRequest){
         boolean isSelled = sellService.sell(sellRequest, sellRepository);
 
         if(isSelled){
             informationService.sendMessage(sellRequest.getUser());
+            return new SellDto(sellRequest.getUser(), sellRequest.getQuantity());
         }
         else{
-            System.out.println();
+            return new SellDto(sellRequest.getUser(), -1);
         }
     }
 }
