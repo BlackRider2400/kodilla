@@ -5,10 +5,14 @@ public class DeliveryRequest {
     private String productName;
     private int quantity;
 
-    public DeliveryRequest(User user, String productName, int quantity) {
-        this.user = user;
+    public DeliveryRequest(String productName, int quantity) {
+        this.user = new User("John", "Green street",
+                "johnsmith@gmail.com");
         this.productName = productName;
         this.quantity = quantity;
+    }
+
+    public DeliveryRequest(com.kodilla.good.patterns.challenges.User user, String glutenFreeWater, int quantity) {
     }
 
     public User getUser() {

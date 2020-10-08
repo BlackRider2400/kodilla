@@ -4,6 +4,6 @@ import java.util.Map;
 
 public interface DeliveryRepository {
     boolean isAvailable(String productName, int quantity);
-    void process(User user, DeliveryRequest deliveryRequest);
+    boolean process(User user, DeliveryRequest deliveryRequest);
     Map<String, Integer> getStorage();
 }
