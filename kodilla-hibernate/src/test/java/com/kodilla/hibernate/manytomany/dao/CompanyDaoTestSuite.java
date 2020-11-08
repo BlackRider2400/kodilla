@@ -6,12 +6,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class CompanyDaoTestSuite {
     @Autowired
     private CompanyDao companyDao;
+
+    @Autowired
+    private EmployeeDao employeeDao;
 
     @Test
     void testSaveManyToMany() {
@@ -57,6 +62,45 @@ public class CompanyDaoTestSuite {
         //} catch (Exception e) {
         //    //do nothing
         //}
+    }
+
+    @Test
+    void testRepositoryDaoQuery(){
+        //Given
+        Company dhl =  new Company("dhl");
+        Company computerService = new Company("Krzych-Komp");
+        Company asus = new Company("Asus");
+        Employee employee1 = new Employee("John", "Smith");
+        Employee employee2 = new Employee("John", "Kovalski");
+        Employee employee3 = new Employee("Karen", "Brown");
+        Employee employee4 = new Employee("Charlie", "Williams");
+
+        companyDao.save(dhl);
+        companyDao.save(computerService);
+        companyDao.save(asus);
+        employeeDao.save(employee1);
+        employeeDao.save(employee2);
+        employeeDao.save(employee3);
+        employeeDao.save(employee4);
+
+        //When
+        List<Company> retrieveSpecificCompany = companyDao.retrieveCompanyWithSpecificThreeLetters("Krz");
+        List<Employee> retrieveEmployeeWithSpecificLastName = employeeDao.retrieveEmployeeWithSpecificLastName("Smith");
+
+        //Then
+        assertEquals(retrieveSpecificCompany.size(), 1);
+        assertEquals(retrieveEmployeeWithSpecificLastName.size(), 1);
+        assertEquals(retrieveEmployeeWithSpecificLastName.get(0).getLastname(), "Smith");
+        assertEquals(retrieveSpecificCompany.get(0).getName(), "Krzych-Komp");
+
+        //CleanUp
+        companyDao.delete(dhl);
+        companyDao.delete(asus);
+        companyDao.delete(computerService);
+        employeeDao.delete(employee1);
+        employeeDao.delete(employee2);
+        employeeDao.delete(employee3);
+        employeeDao.delete(employee4);
     }
 }
 
