@@ -45,12 +45,6 @@ public class InvoiceDaoTestSuite {
         Invoice invoice = new Invoice("1", items);
 
         //When
-        productDao.save(product1);
-        productDao.save(product2);
-        productDao.save(product3);
-        itemDao.save(item1);
-        itemDao.save(item2);
-        itemDao.save(item3);
         invoiceDao.save(invoice);
 
         //Then
