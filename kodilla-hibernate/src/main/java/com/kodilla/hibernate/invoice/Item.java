@@ -1,7 +1,6 @@
 package com.kodilla.hibernate.invoice;
 
 import com.sun.istack.NotNull;
-import org.springframework.data.relational.core.sql.In;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -9,7 +8,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "ITEMS")
 public class Item {
-    private long id;
+    private Long id;
     private Product product;
     private BigDecimal price;
     private int quantity;
@@ -30,15 +29,15 @@ public class Item {
     @GeneratedValue
     @NotNull
     @Column(name = "ID", unique = true)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "PRODUCT_ID")
     public Product getProduct() {
         return product;

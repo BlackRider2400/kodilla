@@ -12,6 +12,11 @@ import java.util.List;
         resultClass = Company.class
 
 )
+@NamedNativeQuery(
+        name = "Company.retrieveCompanyWithSpecificLetters",
+        query = "SELECT * FROM companies WHERE company_name like :TXT",
+        resultClass = Company.class
+)
 @Entity
 @Table(name = "COMPANIES")
 public class Company {

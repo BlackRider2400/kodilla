@@ -10,6 +10,11 @@ import java.util.List;
         name = "Employee.retrieveEmployeeWithSpecificLastName",
         query = "FROM Employee WHERE lastname = :LASTNAME"
 )
+@NamedNativeQuery(
+        name = "Employee.retrieveEmployeeWithSpecificLettersInName",
+        query = "SELECT * FROM WHERE firstname like :TEXT",
+        resultClass = Employee.class
+)
 @Entity
 @Table(name = "EMPLOYEES")
 public class Employee {
